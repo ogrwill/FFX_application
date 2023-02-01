@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Monitoring Message Queues</h1>
+
+<table style="width:100%;border:1px solid black">   
+    <tr>
+        <td>Message Sender </td>
+        <td id="MessageSender">UP</td>
+        
+    </tr>
+    <tr>
+        <td>Message Receiver</td>
+        <td id="MessageReceiver">UP</td>        
+    </tr>
+</table>
+
+
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+</style>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", () => {
+        checkServices();
+    });
+
+    let timer = 5 * 1000;
+
+    setInterval(() => {
+        checkServices();
+    }, timer);
+
+    function checkServices() {                                                                                                             
+        CheckService("MessageSender");
+        CheckService("MessageReceiver");
+    }
+
+    function CheckService(serviceName) {
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("CheckService")?serviceName=" + serviceName,
+            success: function (data) {
+                let el = document.getElementById(serviceName);
+                if (data === true) {
+                    el.innerText = "UP and checked";
+                    el.style.backgroundColor = "lightgreen";
+                    return;
+                }
+                else {
+                    el.innerText = "DOWN and checked";
+                    el.style.backgroundColor = "red";
+                    return;
+                }
+            }
+        })
+    }
+
+
+
+</script>
