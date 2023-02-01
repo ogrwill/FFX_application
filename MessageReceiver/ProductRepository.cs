@@ -21,10 +21,10 @@ namespace MessageReceiver
                 using (SqlConnection connection = new SqlConnection(_connection))
                 {
                     connection.Open();
-                    using (SqlCommand command = new SqlCommand("INSERT INTO DB.dbo.Product VALUES (@id, '@title', @price); ", connection))
+                    using (SqlCommand command = new SqlCommand("INSERT INTO FFX.dbo.Product VALUES (@id, @title, @price); ", connection))
                     {
                         command.Parameters.AddWithValue("@id", product.ID);
-                        command.Parameters.AddWithValue("@title", product.Title);
+                        command.Parameters.AddWithValue("@title", "'" + product.Title + "'");
                         command.Parameters.AddWithValue("@price", product.Price.ToString());
 
                         return command.ExecuteNonQuery();
