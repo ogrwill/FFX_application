@@ -9,9 +9,9 @@ namespace MessageReceiver
     public class MQReceiver
     {
         private readonly ProductRepository _productRepository;
-        public MQReceiver()
+        public MQReceiver(string connectionString)
         {
-            _productRepository = new ProductRepository("");
+            _productRepository = new ProductRepository(connectionString);
         }
 
         public void Receive()

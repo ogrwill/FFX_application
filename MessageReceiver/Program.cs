@@ -7,7 +7,8 @@ namespace MessageReceiver
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            MQReceiver receiver = new MQReceiver();
+            var startup = new Startup();
+            MQReceiver receiver = new MQReceiver(startup.AppSettings.ConnectionString);
             receiver.Receive();
         }
     }
