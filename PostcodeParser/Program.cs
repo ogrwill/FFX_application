@@ -9,10 +9,8 @@ namespace PostcodeParser
         {
             Console.WriteLine("Enter postcode:");
             var postcode = Console.ReadLine();
-            ParsePostcode("M28 7JP");
-            ParsePostcode("WC2H7DE");
-            ParsePostcode("CT21     4LR");
-            ParsePostcode("N33DP");
+            ParsePostcode(postcode);
+           
         }
 
         public static void ParsePostcode(string postcode)
@@ -22,7 +20,7 @@ namespace PostcodeParser
             //normalise first
             postcode = new string(postcode.ToCharArray()
             .Where(c => !char.IsWhiteSpace(c))
-            .ToArray()); 
+            .ToArray()).ToUpper(); 
 
             string first = "";
             string last = "";
@@ -44,7 +42,7 @@ namespace PostcodeParser
 
            
 
-            Console.WriteLine(" INWARD CODE: " + last);
+            Console.WriteLine("    INWARD CODE: " + last);
 
             string inNum = new string(last.Where(char.IsDigit).ToArray());
             Console.WriteLine("         INWARD NUMBER: " + inNum);
